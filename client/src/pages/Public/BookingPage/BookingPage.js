@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles, Grid, Container } from '@material-ui/core';
+import "./Booking.css"
 import {
   getMovie,
   getCinemasUserModeling,
@@ -195,7 +196,7 @@ class BookingPage extends Component {
     const filteredReservations = reservations.filter(
       reservation =>
         new Date(reservation.date).toLocaleDateString() ===
-          new Date(selectedDate).toLocaleDateString() &&
+        new Date(selectedDate).toLocaleDateString() &&
         reservation.startAt === selectedTime
     );
     if (filteredReservations.length && selectedDate && selectedTime) {
@@ -417,6 +418,106 @@ class BookingPage extends Component {
                 />
               </>
             )}
+            <form id="feedback" action="" >
+            <section id="testimonials">
+              {/*heading-*/}
+              <div className="testimonial-heading">
+                <span>Comments</span>
+              </div>
+              {/*testimonials-box-container----*/}
+              <div className="testimonial-box-container">
+                {/*BOX-1------------*/}
+                <div className="testimonial-box">
+                  {/*top-----------------------*/}
+                  <div className="box-top">
+                    {/*profile---*/}
+                    <div className="profile">
+                      {/*img--*/}
+                      <div className="profile-img">
+                        <img src="https://picsum.photos/100" />
+                      </div>
+                      {/*name-and-username*/}
+                      <div className="name-user">
+                        <strong>Touseeq Ijaz</strong>
+                        <span>@touseeqijazweb</span>
+                      </div>
+                    </div>
+                    {/*reviews----*/}
+                    <div className="reviews">
+                      <i className="fas fa-star" />
+                      <i className="fas fa-star" />
+                      <i className="fas fa-star" />
+                      <i className="fas fa-star" />
+                      <i className="far fa-star" />{/*Empty star*/}
+                    </div>
+                  </div>
+                  {/*Comments--------------------------------------*/}
+                  <div className="client-comment">
+                    <p>Great Movie!!!</p>
+                  </div>
+                </div>
+                {/*BOX-2------------*/}
+                <div className="testimonial-box">
+                  {/*top-----------------------*/}
+                  <div className="box-top">
+                    {/*profile---*/}
+                    <div className="profile">
+                      {/*img--*/}
+                      <div className="profile-img">
+                        <img src="https://picsum.photos/100" />
+                      </div>
+                      {/*name-and-username*/}
+                      <div className="name-user">
+                        <strong>J.K Rowling</strong>
+                        <span>@jkrowling</span>
+                      </div>
+                    </div>
+                    {/*reviews----*/}
+                    <div className="reviews">
+                      <i className="fas fa-star" />
+                      <i className="fas fa-star" />
+                      <i className="fas fa-star" />
+                      <i className="fas fa-star" />
+                      <i className="fas fa-star" />{/*Empty star*/}
+                    </div>
+                  </div>
+                  {/*Comments--------------------------------------*/}
+                  <div className="client-comment">
+                    <p>Recommened you should watch at least once!</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+                <div class="pinfo">Rate our overall services.</div>
+                <div class="form-group">
+                  <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i className="far fa-star" /></span>
+                      <select class="form-control" id="rate">
+                        <option value="1star">1</option>
+                        <option value="2stars">2</option>
+                        <option value="3stars">3</option>
+                        <option value="4stars">4</option>
+                        <option value="5stars">5</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="pinfo">Write your feedback.</div>
+                <div class="form-group">
+                  <div class="col-md-4 inputGroupContainer">
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
+                      <textarea class="form-control" id="review" rows="3"></textarea>
+
+                    </div>
+                  </div>
+                </div>
+              <button type="button" class="btn btn-dark">Submit</button>
+
+              </form>
+            
+
           </Grid>
         </Grid>
         <ResponsiveDialog

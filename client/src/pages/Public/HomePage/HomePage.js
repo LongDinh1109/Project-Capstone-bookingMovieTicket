@@ -48,11 +48,11 @@ class HomePage extends Component {
       <Fragment>
         <MovieBanner movie={randomMovie} height="85vh" />
         <Box height={60} />
-        <MovieCarousel
+        {/* <MovieCarousel
           carouselClass={classes.carousel}
           title="Suggested for you"
           movies={suggested}
-        />
+        /> */}
         <MovieCarousel
           carouselClass={classes.carousel}
           title="Now Showing"

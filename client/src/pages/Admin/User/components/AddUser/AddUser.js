@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { withStyles, Typography } from '@material-ui/core';
 import { Button, TextField, MenuItem } from '@material-ui/core';
 import styles from './styles';
-import { addShowtime, updateShowtime } from '../../../../../store/actions';
+import { addUser, updateUser } from '../../../../../store/actions';
 
 class AddUser extends Component {
   state = {
@@ -51,22 +51,44 @@ class AddUser extends Component {
   };
 
   onAddUser = () => {
-    const user = { ...this.state };
+    // const user = { ...this.state };
+    const {name, username, email, password, role, phone} = this.state;
+    const user ={
+      name,
+      username,
+      email,
+      password,
+      role,
+      phone
+    };
     this.props.addUser(user);
   };
 
   onUpdateUser = () => {
     const user = { ...this.state };
+    // const {name, username, email, password, role, phone} = this.state;
+    // const user ={
+    //   name,
+    //   username,
+    //   email,
+    //   password,
+    //   role,
+    //   phone
+    // };
     this.props.updateUser(user, this.props.selectedUser._id);
   };
 
   render() {
-    const { classes, className, selectedUser } = this.props;
+    const { classes, className,selectedUser } = this.props;
     const { name, username, email, password, role, phone } = this.state;
 
     const rootClassName = classNames(classes.root, className);
-    const title = selectedUser ? 'Edit User' : 'Add User';
-    const submitButton = selectedUser ? 'Update User' : 'Add User';
+    const title = selectedUser 
+      ? 'Edit User' 
+      : 'Add User';
+    const submitButton = selectedUser 
+      ? 'Update User' 
+      : 'Add User';
     const submitAction = selectedUser
       ? () => this.onUpdateUser()
       : () => this.onAddUser();
@@ -182,13 +204,11 @@ AddUser.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = ({ movieState, cinemaState }) => ({
-  movies: movieState.movies,
-  nowShowing: movieState.nowShowing,
-  cinemas: cinemaState.cinemas
+const mapStateToProps = ({ userState }) => ({
+  users: userState.users
 });
 
-const mapDispatchToProps = { addShowtime, updateShowtime };
+const mapDispatchToProps = { addUser, updateUser};
 
 export default connect(
   mapStateToProps,

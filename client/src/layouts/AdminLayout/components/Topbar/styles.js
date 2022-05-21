@@ -27,7 +27,7 @@ export default theme => ({
     maxWidth: '100%',
     margin: 'auto',
     fontFamily: 'Montserrat,sans-serif',
-    fontSize: '22px',
+    fontSize: '16px',
     fontWeight: 700,
     letterSpacing: 3,
     color: theme.palette.common.white

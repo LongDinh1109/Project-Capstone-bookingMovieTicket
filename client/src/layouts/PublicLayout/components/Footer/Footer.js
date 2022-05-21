@@ -13,7 +13,7 @@ export default function Footer() {
       <Typography variant="caption">
         Crafted with love |{' '}
         <Link href="#" target="_blank" rel="noopener">
-          Joker Fam
+          JFam
         </Link>
       </Typography>
     </div>

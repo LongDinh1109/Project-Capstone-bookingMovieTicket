@@ -55,12 +55,12 @@ export const addUser = user => async dispatch => {
     if (response.ok) {
       dispatch(setAlert('User Created', 'success', 5000));
       dispatch({ type: ADD_USER, payload: newUser });
-      return { status: 'success', message: 'User Created' };
-    } else {
-      throw new Error(data._message);
-    }
+      return { status: 'success', message: 'User Created' };}
+    // } else {
+    //   throw new Error(data._message);
+    // }
   } catch (error) {
-    dispatch(setAlert(error.message, 'error', 5000));
+    // dispatch(setAlert(error.message, 'error', 5000));
     return {
       status: 'error',
       message: ' User have not been saved, try again.'
@@ -85,12 +85,12 @@ export const updateUser = (user, id) => async dispatch => {
     if (response.ok) {
       dispatch(setAlert('User Updated', 'success', 5000));
       dispatch({ type: UPDATE_USER, payload: newUser });
-      return { status: 'success', message: 'User Updated' };
-    } else {
-      throw new Error(data._message);
-    }
+      return { status: 'success', message: 'User Updated' };}
+    // } else {
+    //   throw new Error(data._message);
+    // }
   } catch (error) {
-    dispatch(setAlert(error.message, 'error', 5000));
+    // dispatch(setAlert(error.message, 'error', 5000));
     return {
       status: 'error',
       message: ' User have not been saved, try again.'

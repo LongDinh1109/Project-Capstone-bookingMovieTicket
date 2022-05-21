@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     position: 'absolute',
-    top: '60%',
+    top: '50%',
     right: 0,
     width: '100%',
     textAlign: 'center',
@@ -32,8 +32,8 @@ const useStyles = makeStyles(theme => ({
   },
   info: {
     position: 'absolute',
-    padding: theme.spacing(5),
-    top: '70%',
+    padding: theme.spacing(2),
+    top: '60%',
     right: 0,
     width: '100%'
   },
@@ -60,10 +60,12 @@ export default function MovieInfo(props) {
       <div className={classes.movieInfos}>
         <div
           className={classes.background}
-          style={{
-            backgroundImage: `url(${movie.image})`
-          }}
-        />
+          // style={{
+          //   backgroundImage: `url(${movie.image})`
+          // }}
+        >
+          <img alt="movie" className={classes.background} src={movie.image} />
+        </div>
         <Typography className={classes.title}>{movie.title}</Typography>
         <div className={classes.info}>
           {movie.director && (

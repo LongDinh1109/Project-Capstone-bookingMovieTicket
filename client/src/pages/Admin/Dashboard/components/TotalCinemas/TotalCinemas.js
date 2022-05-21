@@ -65,7 +65,7 @@ const TotalCinemas = props => {
             </Avatar>
           </Grid>
         </Grid>
-        <div className={classes.difference}>
+        {/* <div className={classes.difference}>
           <ArrowDownwardIcon className={classes.differenceIcon} />
           <Typography className={classes.differenceValue} variant="body2">
             16%
@@ -73,7 +73,7 @@ const TotalCinemas = props => {
           <Typography className={classes.caption} variant="caption">
             Since last month
           </Typography>
-        </div>
+        </div> */}
       </CardContent>
     </Card>
   );
