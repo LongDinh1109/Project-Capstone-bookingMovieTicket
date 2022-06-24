@@ -34,10 +34,22 @@ const cinemaSchema = new Schema({
     required: false,
   },
   feedbacks: {
-    type: [{String, Number, String}],
-    required: false
-  }
+    type: [feedback],
+    required: false,   
+  },
 
+});
+
+const feedback = new mongoose.Schema({
+  name: {
+    type: String,
+  },
+  rating: {
+    type: Number,
+  },
+  comment: {
+    type: String,
+  },
 });
 
 const Cinema = mongoose.model('Cinema', cinemaSchema);
