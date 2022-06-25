@@ -12,6 +12,8 @@ import {
   getReservations,
   getSuggestedReservationSeats,
   setSelectedSeats,
+  setSelectedCity,
+  setSelectedDistrict,
   setSelectedCinema,
   setSelectedDate,
   setSelectedTime,
@@ -280,6 +282,8 @@ class BookingPage extends Component {
     }
   };
 
+  onChangeCity = event => this.props.setSelectedCity(event.target.value);
+  onChangeDistrict = event => this.props.setSelectedDistrict(event.target.value);
   onChangeCinema = event => this.props.setSelectedCinema(event.target.value);
   onChangeDate = date => this.props.setSelectedDate(date);
   onChangeTime = event => this.props.setSelectedTime(event.target.value);
@@ -352,6 +356,8 @@ class BookingPage extends Component {
       cinema,
       showtimes,
       selectedSeats,
+      selectedCity,
+      selectedDistrict,
       selectedCinema,
       selectedDate,
       selectedTime,
@@ -384,11 +390,15 @@ class BookingPage extends Component {
               times={uniqueTimes}
               showtimes={showtimes}
               selectedCinema={selectedCinema}
+              selectedCity={selectedCity}
+              selectedDistrict={selectedDistrict}
               selectedDate={selectedDate}
               selectedTime={selectedTime}
               onChangeCinema={this.onChangeCinema}
               onChangeDate={this.onChangeDate}
               onChangeTime={this.onChangeTime}
+              onChangeCity={this.onChangeCity}
+              onChangeDistrict={this.onChangeDistrict}
             />
             {showInvitation && !!selectedSeats.length && (
               <BookingInvitation
@@ -464,6 +474,8 @@ const mapStateToProps = (
   selectedSeats: checkoutState.selectedSeats,
   suggestedSeat: checkoutState.suggestedSeat,
   selectedCinema: checkoutState.selectedCinema,
+  selectedCity: checkoutState.selectedCity,
+  selectedDistrict: checkoutState.selectedDistrict,
   selectedDate: checkoutState.selectedDate,
   selectedTime: checkoutState.selectedTime,
   showLoginPopup: checkoutState.showLoginPopup,
@@ -484,6 +496,8 @@ const mapDispatchToProps = {
   addReservation,
   setSelectedSeats,
   setSuggestedSeats,
+  setSelectedCity,
+  setSelectedDistrict,
   setSelectedCinema,
   setSelectedDate,
   setSelectedTime,

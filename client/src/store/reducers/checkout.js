@@ -8,13 +8,17 @@ import {
   RESET_CHECKOUT,
   SET_INVITATION,
   SET_SUGGESTED_SEATS,
-  SET_QR_CODE
+  SET_QR_CODE,
+  SET_SELECT_DISTRICT,
+  SET_SELECT_CITY,
 } from '../types';
 
 const initialState = {
   selectedSeats: [],
   suggestedSeat: [],
   selectedCinema: '',
+  selectedCity: '',
+  selectedDistrict: '',
   selectedDate: null,
   selectedTime: '',
   showLoginPopup: false,
@@ -55,6 +59,17 @@ const setSelectedCinema = (state, selectedCinema) => ({
   ...state,
   selectedCinema
 });
+
+const setSelectedCity = (state, selectedCity) => ({
+  ...state,
+  selectedCity
+});
+
+const setSelectedDistrict = (state, selectedDistrict) => ({
+  ...state,
+  selectedDistrict
+});
+
 const setSelectedDate = (state, selectedDate) => ({
   ...state,
   selectedDate
@@ -99,6 +114,10 @@ export default function(state = initialState, action) {
       return setSuggestedSeats(state, payload);
     case SET_SELECTED_CINEMA:
       return setSelectedCinema(state, payload);
+    case SET_SELECT_DISTRICT:
+      return setSelectedDistrict(state, payload);
+    case SET_SELECT_CITY:
+      return setSelectedCity(state, payload);
     case SET_SELECTED_DATE:
       return setSelectedDate(state, payload);
     case SET_SELECTED_TIME:
