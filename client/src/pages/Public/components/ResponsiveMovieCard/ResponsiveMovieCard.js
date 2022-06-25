@@ -7,13 +7,17 @@ import styles from './styles';
 // import CaledarIcon from '@material-ui/icons/CalendarToday';
 import { textTruncate } from '../../../../utils';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 const MovieCard = props => {
   const { classes, movie } = props;
   const movieImage = movie && movie.image 
       ? movie.image
       : 'https://source.unsplash.com/featured/?cinema';
-
+  // var now = moment();
+  // var m = moment.utc(movie.releaseDate.date + ' ' + movie.releaseDate.time, "YYYY-MM-DD  HH:mm:ss");
+  // var isafter = m.isAfter(movie.releaseDate);
+  // if (!isafter)
   return (
     <Link to={`/movie/${movie._id}`} style={{ textDecoration: 'none' }}>
       <Paper className={classes.movieCard} elevation={20}>
@@ -75,6 +79,7 @@ const MovieCard = props => {
       </Paper>
     </Link>
   );
+  // else return <></>
 };
 
 MovieCard.propTypes = {

@@ -18,7 +18,9 @@ export default function BookingForm(props) {
     selectedTime,
     onChangeTime
   } = props;
-
+  // const cities = cinemas.map(e=> {return {
+  //   city: e.city, district: e.district, id: e._id}}).filter((value, index, a) => {
+  //   return a.indexOf(value) === index});
   const showtime = showtimes.find(
     showtime => showtime.cinemaId === selectedCinema
   );
