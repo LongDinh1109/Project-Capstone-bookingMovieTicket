@@ -49,13 +49,13 @@ const cinemaSchema = new Schema({
   },
   contact: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
     // lowercase: true,
   },
   location: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
     // lowercase: true,
   },

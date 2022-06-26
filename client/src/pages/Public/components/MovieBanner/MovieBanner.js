@@ -7,8 +7,7 @@ import {
   Button,
   makeStyles,
   withStyles,
-  Grid,
-
+  Grid
 } from '@material-ui/core';
 import { textTruncate } from '../../../../utils';
 import { Link } from 'react-router-dom';
@@ -31,16 +30,16 @@ const StyledRating = withStyles({
 function MovieBanner(props) {
   const { movie, fullDescription } = props;
   const classes = useStyles(props);
-  const movieImage = movie && movie.image 
-  ? movie.image
-  : 'https://source.unsplash.com/featured/?cinema';
+  const movieImage = movie && movie.image
+    ? movie.image
+    : 'https://source.unsplash.com/featured/?cinema';
   if (!movie) return null;
-
+  console.log(movie.trailer);
   return (
     <div className={classes.movieHero}>
       <div className={classes.infoSection}>
         <header className={classes.movieHeader}>
-        <Grid container>
+          <Grid container>
             <Grid item>
               {fullDescription && (
                 <Box mb={3} display="flex" alignItems="center" flexWrap="wrap">

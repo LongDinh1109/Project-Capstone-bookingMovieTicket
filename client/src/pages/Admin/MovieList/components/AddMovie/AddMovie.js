@@ -43,7 +43,8 @@ class AddMovie extends Component {
         description,
         duration,
         releaseDate,
-        endDate
+        endDate,
+        trailer
       } = this.props.edit;
       this.setState({
         title,
@@ -54,7 +55,8 @@ class AddMovie extends Component {
         description,
         duration,
         releaseDate,
-        endDate
+        endDate,
+        trailer
       });
     }
   }
@@ -88,6 +90,7 @@ class AddMovie extends Component {
     const { image, genre, ...rest } = this.state;
     const movie = { ...rest, genre: genre.join(',') };
     this.props.updateMovie(this.props.edit._id, movie, image);
+    console.log(this.state);
   };
 
   onRemoveMovie = () => this.props.removeMovie(this.props.edit._id);
@@ -104,7 +107,8 @@ class AddMovie extends Component {
       director,
       cast,
       releaseDate,
-      endDate
+      endDate,
+      trailer
     } = this.state;
 
     const rootClassName = classNames(classes.root, className);
@@ -166,6 +170,21 @@ class AddMovie extends Component {
               value={description}
               onChange={event =>
                 this.handleFieldChange('description', event.target.value)
+              }
+            />
+          </div>
+          <div className={classes.field}>
+            <TextField
+              fullWidth
+              multiline
+              className={classes.textField}
+              label="Trailer"
+              margin="dense"
+              required
+              variant="outlined"
+              value={trailer}
+              onChange={event =>
+                this.handleFieldChange('trailer', event.target.value)
               }
             />
           </div>

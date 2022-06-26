@@ -23,7 +23,9 @@ class AddCinema extends Component {
     city: '',
     seatsAvailable: '',
     seats: [],
-    notification: {}
+    notification: {},
+    location:'',
+    contact:''
   };
 
   componentDidMount() {
@@ -54,9 +56,11 @@ class AddCinema extends Component {
       city,
       seatsAvailable,
       seats,
-      district
+      district,
+      location,
+      contact
     } = this.state;
-    const cinema = { name, ticketPrice, city, seatsAvailable, seats, district };
+    const cinema = { name, ticketPrice, city, seatsAvailable, seats, district ,location,contact};
     let notification = {};
     type === 'create'
       ? (notification = await createCinemas(image, cinema))
@@ -131,8 +135,10 @@ class AddCinema extends Component {
       seatsAvailable,
       notification,
       district,
+      location,
+      contact
     } = this.state;
-
+    console.log('123',this.state);
     const rootClassName = classNames(classes.root, className);
     const mainTitle = this.props.editCinema ? 'Edit Cinema' : 'Add Cinema';
     const submitButton = this.props.editCinema
@@ -184,6 +190,32 @@ class AddCinema extends Component {
               value={district}
               onChange={event =>
                 this.handleFieldChange('district', event.target.value)
+              }
+            />
+          </div>
+          <div className={classes.field}>
+            <TextField
+              className={classes.textField}
+              label="Location"
+              margin="dense"
+              required
+              value={location}
+              variant="outlined"
+              onChange={event =>
+                this.handleFieldChange('location', event.target.value)
+              }
+            />
+
+            <TextField
+              fullWidth
+              className={classes.textField}
+              label="Contact"
+              margin="dense"
+              required
+              variant="outlined"
+              value={contact}
+              onChange={event =>
+                this.handleFieldChange('contact', event.target.value)
               }
             />
           </div>

@@ -35,12 +35,6 @@ const movieSchema = new Schema({
     trim: true,
     lowercase: true,
   },
-  movieLink: {
-    type: String,
-    required: true,
-    trim: true,
-    lowercase: true,
-  },
   description: {
     type: String,
     required: true,
@@ -61,7 +55,7 @@ const movieSchema = new Schema({
   },
   trailer: {
     type: String,
-    required: true,
+    required: false,
     trim: true,
   },
 });
