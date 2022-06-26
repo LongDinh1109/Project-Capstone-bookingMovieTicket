@@ -77,6 +77,7 @@ router.put('/movies/:id', auth.enhance, async (req, res) => {
     'duration',
     'releaseDate',
     'endDate',
+    'trailer'
   ];
   const isValidOperation = updates.every((update) => allowedUpdates.includes(update));
 

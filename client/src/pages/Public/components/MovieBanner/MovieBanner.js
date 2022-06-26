@@ -6,13 +6,16 @@ import {
   Typography,
   Button,
   makeStyles,
-  withStyles
+  withStyles,
+  Grid,
+
 } from '@material-ui/core';
 import { textTruncate } from '../../../../utils';
 import { Link } from 'react-router-dom';
 import ArrowRightAlt from '@material-ui/icons/ArrowRightAlt';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import styles from './styles';
+import ReactPlayer from 'react-player/youtube';
 
 const useStyles = makeStyles(styles);
 
@@ -37,50 +40,59 @@ function MovieBanner(props) {
     <div className={classes.movieHero}>
       <div className={classes.infoSection}>
         <header className={classes.movieHeader}>
-          {fullDescription && (
-            <Box mb={3} display="flex" alignItems="center" flexWrap="wrap">
-              {movie.genre.split(',').map((genre, index) => (
-                <Typography
-                  key={`${genre}-${index}`}
-                  className={classes.tag}
-                  variant="body1"
-                  color="inherit">
-                  {genre}
-                </Typography>
-              ))}
+        <Grid container>
+            <Grid item>
+              {fullDescription && (
+                <Box mb={3} display="flex" alignItems="center" flexWrap="wrap">
+                  {movie.genre.split(',').map((genre, index) => (
+                    <Typography
+                      key={`${genre}-${index}`}
+                      className={classes.tag}
+                      variant="body1"
+                      color="inherit">
+                      {genre}
+                    </Typography>
+                  ))}
 
-              <StyledRating
-                value={4}
-                readOnly
-                size="small"
-                emptyIcon={<StarBorderIcon fontSize="inherit" />}
-              />
-            </Box>
-          )}
-          <Typography
-            className={classes.movieTitle}
-            variant="h1"
-            color="inherit">
-            {movie.title}
-          </Typography>
-          <Typography
-            className={classes.descriptionText}
-            variant="body1"
-            color="inherit">
-            {textTruncate(movie.description, 450)}
-          </Typography>
-          <Typography className={classes.director} variant="h4" color="inherit">
-            By: {movie.director}
-          </Typography>
-          <Typography
-            className={classes.duration}
-            variant="body1"
-            color="inherit">
-            {movie.duration} min
-          </Typography>
-          <Typography className={classes.genre} variant="body1" color="inherit">
-            {movie.genre}
-          </Typography>
+                  <StyledRating
+                    value={4}
+                    readOnly
+                    size="small"
+                    emptyIcon={<StarBorderIcon fontSize="inherit" />}
+                  />
+                </Box>
+              )}
+              <Typography
+                className={classes.movieTitle}
+                variant="h1"
+                color="inherit">
+                {movie.title}
+              </Typography>
+              <Typography
+                className={classes.descriptionText}
+                variant="body1"
+                color="inherit">
+                {textTruncate(movie.description, 450)}
+              </Typography>
+              <Typography className={classes.director} variant="h4" color="inherit">
+                By: {movie.director}
+              </Typography>
+              <Typography
+                className={classes.duration}
+                variant="body1"
+                color="inherit">
+                {movie.duration} min
+              </Typography>
+              <Typography className={classes.genre} variant="body1" color="inherit">
+                {movie.genre}
+              </Typography>
+            </Grid>
+            <Grid item sx={{ margin: 8 }}>
+            <Typography className={classes.director} variant="h4" color="inherit">
+              <ReactPlayer url={`${movie.trailer}`} width={"500px"} height={"300px"}/>
+            </Typography>  
+            </Grid>
+          </Grid>
         </header>
       </div>
       <img

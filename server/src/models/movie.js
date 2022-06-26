@@ -59,6 +59,11 @@ const movieSchema = new Schema({
     type: Date,
     required: true,
   },
+  trailer: {
+    type: String,
+    required: true,
+    trim: true,
+  },
 });
 
 const Movie = mongoose.model('Movie', movieSchema);
