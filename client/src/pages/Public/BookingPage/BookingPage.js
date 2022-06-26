@@ -12,6 +12,8 @@ import {
   getReservations,
   getSuggestedReservationSeats,
   setSelectedSeats,
+  setSelectedCity,
+  setSelectedDistrict,
   setSelectedCinema,
   setSelectedDate,
   setSelectedTime,
@@ -280,6 +282,8 @@ class BookingPage extends Component {
     }
   };
 
+  onChangeCity = event => this.props.setSelectedCity(event.target.value);
+  onChangeDistrict = event => this.props.setSelectedDistrict(event.target.value);
   onChangeCinema = event => this.props.setSelectedCinema(event.target.value);
   onChangeDate = date => this.props.setSelectedDate(date);
   onChangeTime = event => this.props.setSelectedTime(event.target.value);
@@ -352,6 +356,8 @@ class BookingPage extends Component {
       cinema,
       showtimes,
       selectedSeats,
+      selectedCity,
+      selectedDistrict,
       selectedCinema,
       selectedDate,
       selectedTime,
@@ -384,11 +390,15 @@ class BookingPage extends Component {
               times={uniqueTimes}
               showtimes={showtimes}
               selectedCinema={selectedCinema}
+              selectedCity={selectedCity}
+              selectedDistrict={selectedDistrict}
               selectedDate={selectedDate}
               selectedTime={selectedTime}
               onChangeCinema={this.onChangeCinema}
               onChangeDate={this.onChangeDate}
               onChangeTime={this.onChangeTime}
+              onChangeCity={this.onChangeCity}
+              onChangeDistrict={this.onChangeDistrict}
             />
             {showInvitation && !!selectedSeats.length && (
               <BookingInvitation
@@ -418,104 +428,7 @@ class BookingPage extends Component {
                 />
               </>
             )}
-            <form id="feedback" action="" >
-            <section id="testimonials">
-              {/*heading-*/}
-              <div className="testimonial-heading">
-                <span>Comments</span>
-              </div>
-              {/*testimonials-box-container----*/}
-              <div className="testimonial-box-container">
-                {/*BOX-1------------*/}
-                <div className="testimonial-box">
-                  {/*top-----------------------*/}
-                  <div className="box-top">
-                    {/*profile---*/}
-                    <div className="profile">
-                      {/*img--*/}
-                      <div className="profile-img">
-                        <img src="https://picsum.photos/100" />
-                      </div>
-                      {/*name-and-username*/}
-                      <div className="name-user">
-                        <strong>Touseeq Ijaz</strong>
-                        <span>@touseeqijazweb</span>
-                      </div>
-                    </div>
-                    {/*reviews----*/}
-                    <div className="reviews">
-                      <i className="fas fa-star" />
-                      <i className="fas fa-star" />
-                      <i className="fas fa-star" />
-                      <i className="fas fa-star" />
-                      <i className="far fa-star" />{/*Empty star*/}
-                    </div>
-                  </div>
-                  {/*Comments--------------------------------------*/}
-                  <div className="client-comment">
-                    <p>Great Movie!!!</p>
-                  </div>
-                </div>
-                {/*BOX-2------------*/}
-                <div className="testimonial-box">
-                  {/*top-----------------------*/}
-                  <div className="box-top">
-                    {/*profile---*/}
-                    <div className="profile">
-                      {/*img--*/}
-                      <div className="profile-img">
-                        <img src="https://picsum.photos/100" />
-                      </div>
-                      {/*name-and-username*/}
-                      <div className="name-user">
-                        <strong>J.K Rowling</strong>
-                        <span>@jkrowling</span>
-                      </div>
-                    </div>
-                    {/*reviews----*/}
-                    <div className="reviews">
-                      <i className="fas fa-star" />
-                      <i className="fas fa-star" />
-                      <i className="fas fa-star" />
-                      <i className="fas fa-star" />
-                      <i className="fas fa-star" />{/*Empty star*/}
-                    </div>
-                  </div>
-                  {/*Comments--------------------------------------*/}
-                  <div className="client-comment">
-                    <p>Recommened you should watch at least once!</p>
-                  </div>
-                </div>
-              </div>
-            </section>
-                <div class="pinfo">Rate our overall services.</div>
-                <div class="form-group">
-                  <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i className="far fa-star" /></span>
-                      <select class="form-control" id="rate">
-                        <option value="1star">1</option>
-                        <option value="2stars">2</option>
-                        <option value="3stars">3</option>
-                        <option value="4stars">4</option>
-                        <option value="5stars">5</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="pinfo">Write your feedback.</div>
-                <div class="form-group">
-                  <div class="col-md-4 inputGroupContainer">
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-pencil"></i></span>
-                      <textarea class="form-control" id="review" rows="3"></textarea>
-
-                    </div>
-                  </div>
-                </div>
-              <button type="button" class="btn btn-dark">Submit</button>
-
-              </form>
+            {/* comment */}
             
 
           </Grid>
@@ -561,6 +474,8 @@ const mapStateToProps = (
   selectedSeats: checkoutState.selectedSeats,
   suggestedSeat: checkoutState.suggestedSeat,
   selectedCinema: checkoutState.selectedCinema,
+  selectedCity: checkoutState.selectedCity,
+  selectedDistrict: checkoutState.selectedDistrict,
   selectedDate: checkoutState.selectedDate,
   selectedTime: checkoutState.selectedTime,
   showLoginPopup: checkoutState.showLoginPopup,
@@ -581,6 +496,8 @@ const mapDispatchToProps = {
   addReservation,
   setSelectedSeats,
   setSuggestedSeats,
+  setSelectedCity,
+  setSelectedDistrict,
   setSelectedCinema,
   setSelectedDate,
   setSelectedTime,

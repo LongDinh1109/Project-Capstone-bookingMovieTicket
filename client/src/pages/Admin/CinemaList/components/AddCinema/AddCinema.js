@@ -53,9 +53,10 @@ class AddCinema extends Component {
       ticketPrice,
       city,
       seatsAvailable,
-      seats
+      seats,
+      district
     } = this.state;
-    const cinema = { name, ticketPrice, city, seatsAvailable, seats };
+    const cinema = { name, ticketPrice, city, seatsAvailable, seats, district };
     let notification = {};
     type === 'create'
       ? (notification = await createCinemas(image, cinema))
@@ -128,7 +129,8 @@ class AddCinema extends Component {
       ticketPrice,
       city,
       seatsAvailable,
-      notification
+      notification,
+      district,
     } = this.state;
 
     const rootClassName = classNames(classes.root, className);
@@ -170,6 +172,18 @@ class AddCinema extends Component {
               value={city}
               onChange={event =>
                 this.handleFieldChange('city', event.target.value)
+              }
+            />
+            <TextField
+              fullWidth
+              className={classes.textField}
+              label="District"
+              margin="dense"
+              required
+              variant="outlined"
+              value={district}
+              onChange={event =>
+                this.handleFieldChange('district', event.target.value)
               }
             />
           </div>

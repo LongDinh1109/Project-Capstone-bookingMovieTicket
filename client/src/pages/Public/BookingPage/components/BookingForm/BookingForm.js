@@ -11,14 +11,28 @@ export default function BookingForm(props) {
     cinemas,
     showtimes,
     selectedCinema,
+    selectedCity,
+    selectedDistrict,
     onChangeCinema,
+    onChangeCity,
+    onChangeDistrict,
     selectedDate,
     onChangeDate,
     times,
     selectedTime,
     onChangeTime
   } = props;
-
+  const cities = cinemas
+    .map(e=> e.city)
+    .filter((value, index, array) => {return array.indexOf(value) === index});
+  let citiesDetail = [];
+  cities.forEach(city => {
+    const district = cinemas
+      .map(e=> city === e.city && e.district)
+      .filter((value, index, array) => {return array.indexOf(value) === index});
+    citiesDetail = [...citiesDetail, {city: city, district: district}]
+  });
+  // console.log('citiesDetail', cinemas, citiesDetail)
   const showtime = showtimes.find(
     showtime => showtime.cinemaId === selectedCinema
   );
@@ -36,10 +50,52 @@ export default function BookingForm(props) {
         </Typography>
       </Box>
     );
-
+  // console.log('detail:', selectedCity, citiesDetail.filter(c => c.city === selectedCity))
   return (
     <Grid container spacing={3}>
       <Grid item xs>
+        <TextField
+          fullWidth
+          select
+          value={selectedCity}
+          label="Select City"
+          variant="outlined"
+          onChange={onChangeCity}>
+          {citiesDetail.map(city => (
+            <MenuItem 
+              key={'city_key_' + citiesDetail.indexOf(city)} 
+              value={city.city}
+              style={{textTransform: 'capitalize'}}
+            >
+              <div style={{textTransform: 'capitalize'}}>
+                {city.city}
+              </div>
+            </MenuItem>
+          ))}
+        </TextField>
+      </Grid>
+      {selectedCity && (<Grid item xs>
+        <TextField
+          fullWidth
+          select
+          value={selectedDistrict}
+          label="Select District"
+          variant="outlined"
+          onChange={onChangeDistrict}>
+          {citiesDetail.filter(c => c.city === selectedCity)?.[0]?.district?.map(d => d !== false ? (
+            <MenuItem 
+              key={'district_key_' + d} 
+              value={d}
+              style={{textTransform: 'capitalize'}}
+            >
+              <div style={{textTransform: 'capitalize'}}>
+                {d}
+              </div>
+            </MenuItem>
+          ): null)}
+        </TextField>
+      </Grid>)}
+      {selectedDistrict && (<Grid item xs>
         <TextField
           fullWidth
           select
@@ -47,13 +103,17 @@ export default function BookingForm(props) {
           label="Select Cinema"
           variant="outlined"
           onChange={onChangeCinema}>
-          {cinemas.map(cinema => (
-            <MenuItem key={cinema._id} value={cinema._id}>
-              {cinema.name}
-            </MenuItem>
-          ))}
+          {cinemas.map(cinema => {
+            if (cinema.city === selectedCity && cinema.district === selectedDistrict)
+            return (
+              <MenuItem key={cinema._id} value={cinema._id}>
+                {cinema.name}
+              </MenuItem>
+            )
+            return null
+          })}
         </TextField>
-      </Grid>
+      </Grid>)}
       {showtime && (
         <Grid item xs>
           <MuiPickersUtilsProvider utils={MomentUtils}>

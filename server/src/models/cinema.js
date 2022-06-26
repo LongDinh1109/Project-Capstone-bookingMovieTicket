@@ -18,6 +18,12 @@ const cinemaSchema = new Schema({
     trim: true,
     lowercase: true,
   },
+  district: {
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true,
+  },
   seats: {
     type: [Schema.Types.Mixed],
     required: true,
@@ -27,27 +33,6 @@ const cinemaSchema = new Schema({
     required: true,
   },
   image: {
-    type: String,
-  },
-  contact: {
-    type: String,
-    required: false,
-  },
-  feedbacks: {
-    type: [feedback],
-    required: false,   
-  },
-
-});
-
-const feedback = new mongoose.Schema({
-  name: {
-    type: String,
-  },
-  rating: {
-    type: Number,
-  },
-  comment: {
     type: String,
   },
 });

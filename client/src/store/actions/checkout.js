@@ -3,6 +3,8 @@ import {
   SET_SELECTED_CINEMA,
   SET_SELECTED_DATE,
   SET_SELECTED_TIME,
+  SET_SELECT_DISTRICT,
+  SET_SELECT_CITY,
   SET_INVITATION,
   TOGGLE_LOGIN_POPUP,
   SHOW_INVITATION_FORM,
@@ -24,6 +26,14 @@ export const setSuggestedSeats = seats => ({
 export const setSelectedCinema = cinema => ({
   type: SET_SELECTED_CINEMA,
   payload: cinema
+});
+export const setSelectedDistrict = district => ({
+  type: SET_SELECT_DISTRICT,
+  payload: district
+});
+export const setSelectedCity = city => ({
+  type: SET_SELECT_CITY,
+  payload: city
 });
 export const setSelectedDate = date => ({
   type: SET_SELECTED_DATE,

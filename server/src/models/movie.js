@@ -35,6 +35,12 @@ const movieSchema = new Schema({
     trim: true,
     lowercase: true,
   },
+  movieLink: {
+    type: String,
+    required: true,
+    trim: true,
+    lowercase: true,
+  },
   description: {
     type: String,
     required: true,
