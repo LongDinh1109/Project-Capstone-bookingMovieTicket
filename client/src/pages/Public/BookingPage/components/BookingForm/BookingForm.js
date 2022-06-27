@@ -32,7 +32,6 @@ export default function BookingForm(props) {
       .filter((value, index, array) => {return array.indexOf(value) === index});
     citiesDetail = [...citiesDetail, {city: city, district: district}]
   });
-  // console.log('citiesDetail', cinemas, citiesDetail)
   const showtime = showtimes.find(
     showtime => showtime.cinemaId === selectedCinema
   );
@@ -50,7 +49,6 @@ export default function BookingForm(props) {
         </Typography>
       </Box>
     );
-  // console.log('detail:', selectedCity, citiesDetail.filter(c => c.city === selectedCity))
   return (
     <Grid container spacing={3}>
       <Grid item xs>
@@ -143,11 +141,19 @@ export default function BookingForm(props) {
             label="Select Time"
             variant="outlined"
             onChange={onChangeTime}>
-            {times.map((time, index) => (
-              <MenuItem key={time + '-' + index} value={time}>
-                {time}
+              <MenuItem key={'default_time' + '-' + '-1'} value={null}>
+                {'None'}
               </MenuItem>
-            ))}
+              {
+                times.map((time, index) => {
+                    return (
+                      <MenuItem key={time + '-' + index} value={time}>
+                        {time}
+                      </MenuItem>
+                    )
+                  }
+                )
+              }
           </TextField>
         </Grid>
       )}
