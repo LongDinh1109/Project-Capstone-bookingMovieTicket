@@ -34,7 +34,7 @@ import BookingForm from './components/BookingForm/BookingForm';
 import BookingSeats from './components/BookingSeats/BookingSeats';
 import BookingCheckout from './components/BookingCheckout/BookingCheckout';
 import BookingInvitation from './components/BookingInvitation/BookingInvitation';
-
+import BookingCompareCinemas from './components/BookingCompareCinemas/BookingCompareCinemas';
 import jsPDF from 'jspdf';
 
 class BookingPage extends Component {
@@ -354,6 +354,7 @@ class BookingPage extends Component {
       user,
       movie,
       cinema,
+      cinemas,
       showtimes,
       selectedSeats,
       selectedCity,
@@ -371,6 +372,15 @@ class BookingPage extends Component {
       suggestedSeat
     } = this.props;
     const { uniqueCinemas, uniqueTimes } = this.onFilterCinema();
+    console.log('cinemas:', cinemas, uniqueCinemas, selectedCinema)
+    let surroundedCinemas = cinemas.filter(c =>
+      c.city === selectedCity && c.district === selectedDistrict && c._id !== selectedCinema
+    )
+
+    let currentCinemas = cinemas.filter(c =>
+      c.city === selectedCity && c.district === selectedDistrict && c._id === selectedCinema
+    )?.[0]
+
     let seats = this.onGetReservedSeats();
     if (suggestedSeats && selectedTime && !suggestedSeat.length) {
       this.onGetSuggestedSeats(seats, suggestedSeats);
@@ -428,9 +438,14 @@ class BookingPage extends Component {
                 />
               </>
             )}
+            {selectedCity && selectedDistrict && cinema && selectedCinema && selectedTime && !showInvitation && (
+              <BookingCompareCinemas
+                surroundedCinemas = {surroundedCinemas}
+                selectedCinema = {selectedCinema}
+                currentCinemas = {currentCinemas}
+              />
+            )}
             {/* comment */}
-            
-
           </Grid>
         </Grid>
         <ResponsiveDialog
@@ -466,6 +481,8 @@ const mapStateToProps = (
   user: authState.user,
   movie: movieState.selectedMovie,
   cinema: cinemaState.selectedCinema,
+  city: cinemaState.selectedCity,
+  district: cinemaState.selectedDistrict,
   cinemas: cinemaState.cinemas,
   showtimes: showtimeState.showtimes.filter(
     showtime => showtime.movieId === ownProps.match.params.id
