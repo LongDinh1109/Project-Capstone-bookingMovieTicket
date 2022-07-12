@@ -60,7 +60,7 @@ class AddCinema extends Component {
       location,
       contact
     } = this.state;
-    const cinema = { name, ticketPrice, city, seatsAvailable, seats, district ,location,contact};
+    const cinema = { name, ticketPrice, city, seatsAvailable, seats, district ,location, contact};
     let notification = {};
     type === 'create'
       ? (notification = await createCinemas(image, cinema))

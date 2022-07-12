@@ -443,6 +443,7 @@ class BookingPage extends Component {
                 surroundedCinemas = {surroundedCinemas}
                 selectedCinema = {selectedCinema}
                 currentCinemas = {currentCinemas}
+                allCinema = {this.props.cinemas}
               />
             )}
             {/* comment */}

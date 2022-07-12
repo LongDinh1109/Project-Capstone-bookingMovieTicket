@@ -95,6 +95,7 @@ const mapStateToProps = ({ userState }) => ({
   selectedUsers: userState.selectedUsers,
   openDialog: userState.openDialog
 });
+
 const mapDispatchToProps = {
   getUsers,
   selectUser,
