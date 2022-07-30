@@ -31,6 +31,7 @@ export default theme => ({
   movieHeader: {
     position: 'relative',
     padding: theme.spacing(3),
+    marginTop:"120px",
     maxWidth: '60%'
   },
   tag: {

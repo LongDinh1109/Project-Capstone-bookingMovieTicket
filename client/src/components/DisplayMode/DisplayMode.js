@@ -12,7 +12,7 @@ const DisplayMode = props => {
 
   return (
     <div className={rootClassName}>
-      <span
+      {/* <span
         className={classNames({
           [classes.option]: true,
           [classes.optionSelected]: mode === 'grid'
@@ -28,7 +28,7 @@ const DisplayMode = props => {
         })}
         onClick={onChange}>
         <ListIcon className={classes.displayIcon} />
-      </span>
+      </span> */}
     </div>
   );
 };

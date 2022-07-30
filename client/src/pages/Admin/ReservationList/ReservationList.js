@@ -41,7 +41,6 @@ class ReservationList extends Component {
     const { classes, reservations, movies, cinemas } = this.props;
 
     const filteredReservations = match(search, reservations, 'phone');
-
     return (
       <div className={classes.root}>
         <ReservationsToolbar

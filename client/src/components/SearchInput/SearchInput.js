@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core';
@@ -7,21 +7,24 @@ import { Search as SearchIcon } from '@material-ui/icons';
 import styles from './styles';
 
 const SearchInput = props => {
-  const { classes, className, onChange, style, ...rest } = props;
+  const { classes, className, onChange, style, searchdisable, ...rest } = props;
 
   const rootClassName = classNames(classes.root, className);
 
   return (
-    <div className={rootClassName} style={style}>
-      <SearchIcon className={classes.icon} />
-      <Input
-        {...rest}
-        className={classes.input}
-        disableUnderline
-        onChange={onChange}
-      />
-    </div>
-  );
+    <Fragment>
+      {!searchdisable ? (
+        <div className={rootClassName} style={style}>
+          <SearchIcon className={classes.icon} />
+          <Input
+            {...rest}
+            className={classes.input}
+            disableUnderline
+            onChange={onChange}
+          />
+        </div>
+      ) : (<Fragment />)}
+      </Fragment>)
 };
 
 SearchInput.propTypes = {
@@ -32,7 +35,7 @@ SearchInput.propTypes = {
 };
 
 SearchInput.defaultProps = {
-  onChange: () => {}
+  onChange: () => { }
 };
 
 export default withStyles(styles)(SearchInput);

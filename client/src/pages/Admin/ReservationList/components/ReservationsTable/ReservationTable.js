@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { withStyles } from '@material-ui/core';
+import { Grid, Typography, withStyles } from '@material-ui/core';
 import {
   Table,
   TableBody,
@@ -34,8 +34,8 @@ class ReservationsTable extends Component {
     reservations: [],
     movies: [],
     cinemas: [],
-    onSelect: () => {},
-    onShowDetails: () => {}
+    onSelect: () => { },
+    onShowDetails: () => { }
   };
 
   handleChangePage = (event, page) => {
@@ -52,81 +52,159 @@ class ReservationsTable extends Component {
   };
 
   render() {
-    const { classes, className, reservations, movies, cinemas } = this.props;
+    const { classes, className, reservations, movies, cinemas, reservationUser } = this.props;
     const { rowsPerPage, page } = this.state;
     const rootClassName = classNames(classes.root, className);
 
     return (
-      <Portlet className={rootClassName}>
-        <PortletContent noPadding>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell align="left">User</TableCell>
-                <TableCell align="left">Phone</TableCell>
-                <TableCell align="left">Start At</TableCell>
-                <TableCell align="left">Movie</TableCell>
-                <TableCell align="left">Cinema</TableCell>
-                <TableCell align="left">Ticket Price</TableCell>
-                <TableCell align="left">Total</TableCell>
-                <TableCell align="left">Checkin</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {reservations
-                .sort((a, b) => new Date(b.date) - new Date(a.date))
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map(reservation => (
-                  <TableRow
-                    className={classes.tableRow}
-                    hover
-                    key={reservation._id}>
-                    <TableCell className={classes.tableCell}>
-                      {reservation.username}
-                    </TableCell>
-                    <TableCell className={classes.tableCell}>
-                      {reservation.phone}
-                    </TableCell>
-                    <TableCell className={classes.tableCell}>
-                      {reservation.startAt}
-                    </TableCell>
-
-                    <TableCell className={classes.tableCell}>
-                      {this.onFindAttr(reservation.movieId, movies, 'title')}
-                    </TableCell>
-                    <TableCell className={classes.tableCell}>
-                      {this.onFindAttr(reservation.cinemaId, cinemas, 'name')}
-                    </TableCell>
-                    <TableCell className={classes.tableCell}>
-                      {reservation.ticketPrice}
-                    </TableCell>
-                    <TableCell className={classes.tableCell}>
-                      {reservation.total}
-                    </TableCell>
-                    <TableCell className={classes.tableCell}>
-                      {reservation.checkin ? 'yes' : 'no'}
-                    </TableCell>
+      <Fragment>
+        {!reservationUser ? (
+          <Portlet className={rootClassName}>
+            <PortletContent noPadding>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <TableCell align="left">User</TableCell>
+                    <TableCell align="left">Phone</TableCell>
+                    <TableCell align="left">Start At</TableCell>
+                    <TableCell align="left">Movie</TableCell>
+                    <TableCell align="left">Cinema</TableCell>
+                    <TableCell align="left">Ticket Price</TableCell>
+                    <TableCell align="left">Total</TableCell>
+                    <TableCell align="left">Checkin</TableCell>
                   </TableRow>
-                ))}
-            </TableBody>
-          </Table>
-          <TablePagination
-            backIconButtonProps={{
-              'aria-label': 'Previous Page'
-            }}
-            component="div"
-            count={reservations.length}
-            nextIconButtonProps={{
-              'aria-label': 'Next Page'
-            }}
-            onChangePage={this.handleChangePage}
-            onChangeRowsPerPage={this.handleChangeRowsPerPage}
-            page={page}
-            rowsPerPage={rowsPerPage}
-            rowsPerPageOptions={[5, 10, 25]}
-          />
-        </PortletContent>
-      </Portlet>
+                </TableHead>
+                <TableBody>
+                  {reservations
+                    .sort((a, b) => new Date(b.date) - new Date(a.date))
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map(reservation => (
+                      <TableRow
+                        className={classes.tableRow}
+                        hover
+                        key={reservation._id}>
+                        <TableCell className={classes.tableCell}>
+                          {reservation.username}
+                        </TableCell>
+                        <TableCell className={classes.tableCell}>
+                          {reservation.phone}
+                        </TableCell>
+                        <TableCell className={classes.tableCell}>
+                          {reservation.startAt}
+                        </TableCell>
+
+                        <TableCell className={classes.tableCell}>
+                          {this.onFindAttr(reservation.movieId, movies, 'title')}
+                        </TableCell>
+                        <TableCell className={classes.tableCell}>
+                          {this.onFindAttr(reservation.cinemaId, cinemas, 'name')}
+                        </TableCell>
+                        <TableCell className={classes.tableCell}>
+                          {reservation.ticketPrice}
+                        </TableCell>
+                        <TableCell className={classes.tableCell}>
+                          {reservation.total}
+                        </TableCell>
+                        <TableCell className={classes.tableCell}>
+                          {reservation.checkin ? 'yes' : 'no'}
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                </TableBody>
+              </Table>
+              <TablePagination
+                backIconButtonProps={{
+                  'aria-label': 'Previous Page'
+                }}
+                component="div"
+                count={reservations.length}
+                nextIconButtonProps={{
+                  'aria-label': 'Next Page'
+                }}
+                onChangePage={this.handleChangePage}
+                onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                page={page}
+                rowsPerPage={rowsPerPage}
+                rowsPerPageOptions={[5, 10, 25]}
+              />
+            </PortletContent>
+          </Portlet>
+        ) :
+          (
+            <Fragment>
+              <Grid item xs={12}>
+                <Typography
+                  variant="h2"
+                  color="inherit">
+                  My Reservations
+                </Typography>
+              </Grid>
+              <Portlet className={rootClassName}>
+                <PortletContent noPadding>
+                  <Table>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell align="left">Date</TableCell>
+                        <TableCell align="left">Start At</TableCell>
+                        <TableCell align="left">Movie</TableCell>
+                        <TableCell align="left">Cinema</TableCell>
+                        <TableCell align="left">Ticket Price</TableCell>
+                        <TableCell align="left">Total</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {reservations
+                        .sort((a, b) => new Date(b.date) - new Date(a.date))
+                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        .map(reservation => (
+                          <TableRow
+                            className={classes.tableRow}
+                            hover
+                            key={reservation._id}>
+                            <TableCell className={classes.tableCell}>
+                              {Date(reservation.date).slice(0, 15)}
+                            </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              {reservation.startAt}
+                            </TableCell>
+
+                            <TableCell className={classes.tableCell}>
+                              {this.onFindAttr(reservation.movieId, movies, 'title')}
+                            </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              {this.onFindAttr(reservation.cinemaId, cinemas, 'name')}
+                            </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              {reservation.ticketPrice}
+                            </TableCell>
+                            <TableCell className={classes.tableCell}>
+                              {reservation.total}
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                    </TableBody>
+                  </Table>
+                  <TablePagination
+                    backIconButtonProps={{
+                      'aria-label': 'Previous Page'
+                    }}
+                    component="div"
+                    count={reservations.length}
+                    nextIconButtonProps={{
+                      'aria-label': 'Next Page'
+                    }}
+                    onChangePage={this.handleChangePage}
+                    onChangeRowsPerPage={this.handleChangeRowsPerPage}
+                    page={page}
+                    rowsPerPage={rowsPerPage}
+                    rowsPerPageOptions={[5, 10, 25]}
+                  />
+                </PortletContent>
+              </Portlet>
+            </Fragment>
+          )}
+      </Fragment>
+
     );
   }
 }

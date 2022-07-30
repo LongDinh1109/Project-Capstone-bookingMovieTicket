@@ -80,6 +80,13 @@ class AddMovie extends Component {
     this.setState(newState);
   };
 
+  handleFieldChangeimage = (field, value) => {
+    const newState = { ...this.state };
+    newState[field] = value;
+    console.log("first",value)
+    this.setState(newState);
+  };
+
   onAddMovie = () => {
     const { image, genre, ...rest } = this.state;
     const movie = { ...rest, genre: genre.join(',') };
@@ -280,7 +287,7 @@ class AddMovie extends Component {
               file={image}
               onUpload={event => {
                 const file = event.target.files[0];
-                this.handleFieldChange('image', file);
+                this.handleFieldChangeimage('image', file);
               }}
             />
           </div>

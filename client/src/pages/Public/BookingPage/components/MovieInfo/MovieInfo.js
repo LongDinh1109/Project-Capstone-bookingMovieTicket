@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     position: 'absolute',
     opacity: 0.4,
     top: 0,
-    height: '70%',
+    height: '250px',
     right: 0,
     backgroundSize: 'cover',
     backgroundPosition: 'center',

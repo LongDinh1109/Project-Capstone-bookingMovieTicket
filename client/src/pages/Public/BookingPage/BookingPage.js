@@ -24,7 +24,8 @@ import {
   setAlert,
   addReservation,
   setSuggestedSeats,
-  setQRCode
+  setQRCode,
+  uploadImage
 } from '../../../store/actions';
 import { ResponsiveDialog } from '../../../components';
 import LoginForm from '../Login/components/LoginForm';
@@ -86,8 +87,25 @@ class BookingPage extends Component {
       40
     );
     doc.addImage(QRCode, 'JPEG', 15, 40, 160, 160);
+    console.log("123123",QRCode)
+    console.log("123123123",doc)
     doc.save(`${movie.title}-${cinema.name}.pdf`);
   };
+
+  dataURLtoFile(dataurl, filename) {
+ 
+    var arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), 
+        n = bstr.length, 
+        u8arr = new Uint8Array(n);
+        
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    
+    return new File([u8arr], filename, {type:mime});
+}
 
   onSelectSeat = (row, seat) => {
     const { cinema, setSelectedSeats } = this.props;
@@ -118,7 +136,8 @@ class BookingPage extends Component {
       addReservation,
       toggleLoginPopup,
       showInvitationForm,
-      setQRCode
+      setQRCode,
+      uploadImage
     } = this.props;
 
     if (selectedSeats.length === 0) return;
@@ -137,7 +156,9 @@ class BookingPage extends Component {
     });
     if (response.status === 'success') {
       const { data } = response;
+      let qrimage = this.dataURLtoFile(data.QRCode, "abc")
       setQRCode(data.QRCode);
+      // uploadImage("6190e2317ad9f0413cb42b84",qrimage)
       getReservations();
       showInvitationForm();
     }
@@ -524,7 +545,8 @@ const mapDispatchToProps = {
   showInvitationForm,
   resetCheckout,
   setAlert,
-  setQRCode
+  setQRCode,
+  uploadImage
 };
 
 export default connect(

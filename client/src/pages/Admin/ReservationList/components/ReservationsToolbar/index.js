@@ -19,7 +19,8 @@ class ReservationsToolbar extends Component {
       search,
       mode,
       onChangeSearch,
-      onChangeMode
+      onChangeMode,
+      searchdisable
     } = this.props;
     const rootClassName = classNames(classes.root, className);
 
@@ -30,6 +31,7 @@ class ReservationsToolbar extends Component {
             className={classes.searchInput}
             placeholder="Search reservation by Phone"
             value={search}
+            searchdisable={searchdisable}
             onChange={onChangeSearch}
           />
           <DisplayMode mode={mode} onChange={onChangeMode} />
