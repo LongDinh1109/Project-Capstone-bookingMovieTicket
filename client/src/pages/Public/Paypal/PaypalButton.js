@@ -44,7 +44,7 @@ const PaypalCheckoutButton = (props) => {
                             {
                                 description: "product.description",
                                 amount: {
-                                    value: Seat,
+                                    value: Seat * props.cinema.ticketPrice,
                                 },
                             },
                         ],
