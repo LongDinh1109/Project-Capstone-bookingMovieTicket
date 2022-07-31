@@ -40,9 +40,9 @@ function AlertDialog(props) {
     const [notification, setnotification] = useState()
 
     const onSubmitAction = async () => {
-        const { updateCinemas,getCinemas } = props;
-        if(props.cinema?.feedbacks){
-            const fb = { "feedbacks": [...props.cinema.feedbacks,feedbacks] }
+        const { updateCinemas, getCinemas } = props;
+        if (props.cinema?.feedbacks) {
+            const fb = { "feedbacks": [...props.cinema.feedbacks, feedbacks] }
             const newnotification = await updateCinemas(null, fb, props.cinema._id);
             setnotification(newnotification);
             if (newnotification && newnotification.status === 'success') getCinemas();
@@ -76,12 +76,13 @@ function AlertDialog(props) {
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
+                style={{ width: '100%' }}
             >
                 <DialogTitle id="alert-dialog-title">
                     {"Cinema"}
                 </DialogTitle>
-                <DialogContent>
-                    <Grid item style={{ width: '550px' }}>
+                <DialogContent style={{ width: '100%' }}>
+                    <Grid item style={{ width: '100%' }}>
                         <Card className={classes.root}>
                             <div style={{ textAlign: 'center' }}>
                                 <img alt="cinema" className={classes.media} src={cinema?.image} />
@@ -94,6 +95,12 @@ function AlertDialog(props) {
                                     Location:
                                     <div style={{ color: 'rgba(255, 255, 255, 0.7)', paddingLeft: 8 }}>
                                         {cinema?.location || ''}
+                                    </div>
+                                </Typography>
+                                <Typography variant="h6" component="p" style={{ display: 'flex' }}>
+                                    Contact:
+                                    <div style={{ color: 'rgba(255, 255, 255, 0.7)', paddingLeft: 8 }}>
+                                        {cinema?.contact || ''}
                                     </div>
                                 </Typography>
                                 <Typography variant="h6" component="p" style={{ display: 'flex' }}>
@@ -110,8 +117,9 @@ function AlertDialog(props) {
                                 </Typography>
                                 <Rating
                                     name="simple-controlled"
-                                    value={cinema?.feedbacks?.rating || 0}
+                                    value={props.averageRating || 0}
                                     style={{ paddingTop: 8 }}
+                                    readOnly
                                 />
                             </CardContent>
                             <CardContent>
@@ -133,13 +141,13 @@ function AlertDialog(props) {
                                     }}
                                 />
                                 <DialogActions>
-                                    <Button onClick={handleClose}>cancel</Button>
-                                    <Button onClick={()=>{onSubmitAction();handleClose()}} autoFocus>
+                                    {/* <Button onClick={handleClose}>cancel</Button> */}
+                                    <Button onClick={() => { onSubmitAction(); handleClose() }} autoFocus>
                                         save
                                     </Button>
                                 </DialogActions>
                             </CardContent>
-                            {props.allCinema?.filter(item=> item._id === props.cinema?._id)?.[0]?.feedbacks?.map((item, index) => {
+                            {props.allCinema?.filter(item => item._id === props.cinema?._id)?.[0]?.feedbacks?.map((item, index) => {
                                 return (
                                     <div key={index}>
                                         <CardContent>
@@ -150,6 +158,7 @@ function AlertDialog(props) {
                                             <Rating
                                                 style={{ paddingTop: 8 }}
                                                 value={item.rating}
+                                                readOnly
                                             />
                                         </CardContent>
                                     </div>

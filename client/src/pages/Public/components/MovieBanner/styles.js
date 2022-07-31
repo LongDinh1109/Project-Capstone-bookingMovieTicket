@@ -91,10 +91,12 @@ export default theme => ({
   },
   movieActions: { position: 'absolute', bottom: 0, right: 0 },
   button: {
-    width: 200,
-    height: 70,
+    width: 300,
+    height: 100,
     borderRadius: 0,
-    zIndex: 2
+    zIndex: 2,
+    fontSize: 25,
+    fontWeight: 600
   },
   learnMore: { color: theme.palette.common.white },
   buttonIcon: { marginLeft: theme.spacing(2) },

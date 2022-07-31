@@ -5,7 +5,7 @@ const useStyles = makeStyles(theme => ({
   movieInfos: {
     background: 'rgba(57, 61, 67, 0.5)',
     position: 'relative',
-    height: '500px'
+    height: '600px'
   },
   background: {
     position: 'absolute',

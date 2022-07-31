@@ -36,14 +36,13 @@ export default function BookingInvitation(props) {
     <div className={classes.root}>
       <Paper className={classes.paper}>
         <Typography variant="h4" align="center">
-          Guest Invitation
+          Payment Successful
         </Typography>
         <Typography
           className={classes.successInfo}
           variant="body1"
           align="center">
-          You have successfuly booked your seats. Please fill the emails below,
-          to send invitations to your friends!
+          You have successfuly booked your seats. Please get the QR Code to check-in cinema!
         </Typography>
         <Box width={1} textAlign="center">
           <Button
@@ -53,7 +52,7 @@ export default function BookingInvitation(props) {
             GET QR CODE
           </Button>
         </Box>
-        <Grid className={classes.gridContainer} container spacing={3}>
+        {/* <Grid className={classes.gridContainer} container spacing={3}>
           {selectedSeats.map((seat, index) => (
             <Grid item xs={12} md={6} lg={4} key={'seat-' + index}>
               <TextField
@@ -93,7 +92,7 @@ export default function BookingInvitation(props) {
               </Button>
             </Grid>
           </Grid>
-        </Grid>
+        </Grid> */}
       </Paper>
     </div>
   );

@@ -87,8 +87,6 @@ class BookingPage extends Component {
       40
     );
     doc.addImage(QRCode, 'JPEG', 15, 40, 160, 160);
-    console.log("123123",QRCode)
-    console.log("123123123",doc)
     doc.save(`${movie.title}-${cinema.name}.pdf`);
   };
 

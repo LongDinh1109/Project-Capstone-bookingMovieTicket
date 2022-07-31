@@ -58,6 +58,7 @@ export default function BookingSeats(props) {
                   key={`seat-${index}`}
                   onClick={() => onSelectSeat(indexRow, index)}
                   className={classes.seat}
+                  style={ seat === 1 ?{pointerEvents: "none"} : {}}
                   bgcolor={
                     seat === 1
                       ? 'rgb(65, 66, 70)'

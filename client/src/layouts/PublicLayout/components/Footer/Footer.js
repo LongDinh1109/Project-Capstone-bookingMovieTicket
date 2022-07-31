@@ -8,14 +8,14 @@ export default function Footer() {
     <div className={classes.root}>
       <Divider />
       <Typography className={classes.copyright} variant="body1">
-        &copy; Cinema Booking Website 2021
+        &copy; Cinema Booking Website 2022
       </Typography>
-      <Typography variant="caption">
+      {/* <Typography variant="caption">
         Crafted with love |{' '}
         <Link href="#" target="_blank" rel="noopener">
           JFam
         </Link>
-      </Typography>
+      </Typography> */}
     </div>
   );
 }

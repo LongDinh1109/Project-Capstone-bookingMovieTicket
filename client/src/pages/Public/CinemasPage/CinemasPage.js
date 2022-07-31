@@ -20,7 +20,6 @@ function CinemasPage(props) {
   useEffect(() => {
     if (!cinemas.length) getCinemas();
   }, [cinemas, getCinemas]);
-
   return (
     <Container maxWidth="xl">
       <Grid container spacing={2}>
@@ -38,7 +37,7 @@ function CinemasPage(props) {
           spacing={2}>
           {cinemas.map(cinema => (
             <Grid key={cinema._id} item xs={12} md={4} lg={3}>
-              <CinemaCard cinema={cinema} />
+              <CinemaCard cinema={cinema} allCinema={cinemas} rating="True"/>
             </Grid>
           ))}
         </Grid>

@@ -61,7 +61,7 @@ router.get('/cinemas/:id', async (req, res) => {
 });
 
 // Update cinema by id
-router.patch('/cinemas/:id', auth.enhance, async (req, res) => {
+router.patch('/cinemas/:id',  async (req, res) => {
   const _id = req.params.id;
   const updates = Object.keys(req.body);
   const allowedUpdates = ['name', 'ticketPrice', 'city', 'seats', 'seatsAvailable', 'district', 'contact', 'location', 'feedbacks'];

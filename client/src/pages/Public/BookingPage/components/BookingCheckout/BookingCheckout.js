@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/styles';
 import { Box, Grid, Typography, Button } from '@material-ui/core';
-
+import PaypalButton from '../../../Paypal/PaypalButton'
 const useStyles = makeStyles(theme => ({
   bannerTitle: {
     fontSize: theme.spacing(1.4),
@@ -23,6 +23,8 @@ const useStyles = makeStyles(theme => ({
 
 export default function BookingCheckout(props) {
   const classes = useStyles(props);
+  const [selectSeat,setSelectSeat] = useState();
+ 
   const {
     user,
     ticketPrice,
@@ -30,7 +32,9 @@ export default function BookingCheckout(props) {
     seatsAvailable,
     onBookSeats
   } = props;
-
+  useEffect(()=>{
+    setSelectSeat(selectedSeats)
+  },[selectedSeats])
   return (
     <Box marginTop={2} bgcolor="rgb(18, 20, 24)">
       <Grid container>
@@ -68,16 +72,18 @@ export default function BookingCheckout(props) {
           md={2}
           style={{
             color: 'rgb(120, 205, 4)',
-            background: 'black',
+            background: 'rgb(26, 26, 26)',
             display: 'flex'
           }}>
-          <Button
+            {selectedSeats > 0?(<PaypalButton onBookSeats={onBookSeats}/>):(<Fragment/>)}
+            
+          {/* <Button
             color="inherit"
             fullWidth
             disabled={seatsAvailable <= 0}
             onClick={() => onBookSeats()}>
             Checkout
-          </Button>
+          </Button> */}
         </Grid>
       </Grid>
     </Box>

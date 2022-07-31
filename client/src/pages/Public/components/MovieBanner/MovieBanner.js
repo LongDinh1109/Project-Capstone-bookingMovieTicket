@@ -106,7 +106,6 @@ function MovieBanner(props) {
           <Link to={`booking/${movie._id}`} style={{ textDecoration: 'none' }}>
             <Button variant="contained" className={classes.button}>
               Buy Tickets
-              <ArrowRightAlt className={classes.buttonIcon} />
             </Button>
           </Link>
         ) : (

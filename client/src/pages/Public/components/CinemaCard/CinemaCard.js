@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import { Paper } from '../../../../components';
 import { EventSeat, AttachMoney } from '@material-ui/icons';
+import BookingRatingCinemas from '../../BookingPage/components/BookingRatingCinemas/BookingRatingCinemas';
+import { Rating } from '@material-ui/lab';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -58,6 +60,7 @@ const useStyles = makeStyles(theme => ({
 
 function CinemaCard(props) {
   const classes = useStyles(props);
+  const [isOpen, setisOpen] = useState(false);
   const { className, cinema } = props;
   const cinemaImage =
     cinema && cinema.image
@@ -65,32 +68,64 @@ function CinemaCard(props) {
       : 'https://source.unsplash.com/featured/?cinema';
 
   const rootClassName = classNames(classes.root, className);
+  const [averageRating, setAverageRating] = useState();
+  useEffect(()=>{
+    if (cinema.feedbacks.length > 0) {
+      let total = 0;
+      cinema.feedbacks.map((item, _index) => {
+        return total += item.rating;
+      })
+      let average = total / cinema.feedbacks.length;
+      setAverageRating(average)
+    }
+  })
+  const chosenCinema = () => {
+    if (cinema.feedbacks.length > 0) {
+      let total = 0;
+      cinema.feedbacks.map((item, _index) => {
+        return total += item.rating;
+      })
+      let average = total / cinema.feedbacks.length;
+      setAverageRating(average)
+    }
+    setisOpen(true);
+  }
   return (
-    <Paper className={rootClassName}>
-      <div className={classes.imageWrapper}>
-        <img alt="cinema" className={classes.image} src={cinemaImage} />
-      </div>
-      <div className={classes.details}>
-        <Typography className={classes.name} variant="h4">
-          {cinema.name}
-        </Typography>
-        <Typography className={classes.city} variant="body1">
-          {cinema.city}
-        </Typography>
-      </div>
-      <div className={classes.stats}>
-        <AttachMoney className={classes.eventIcon} />
-        <Typography className={classes.eventText} variant="body2">
-          {cinema.ticketPrice} <span>$</span> per movie
-        </Typography>
-      </div>
-      <div className={classes.stats}>
-        <EventSeat className={classes.eventIcon} />
-        <Typography className={classes.eventText} variant="body2">
-          {cinema.seatsAvailable} seats Available
-        </Typography>
-      </div>
-    </Paper>
+    <Fragment>
+      <Paper className={rootClassName} onClick={chosenCinema}>
+        <div className={classes.imageWrapper}>
+          <img alt="cinema" className={classes.image} src={cinemaImage} />
+        </div>
+        <div className={classes.details}>
+          <Typography className={classes.name} variant="h4">
+            {cinema.name}
+          </Typography>
+          <Typography className={classes.city} variant="body1">
+            {cinema.city}
+          </Typography>
+          <Rating
+            name="simple-controlled"
+            value={averageRating || 0}
+            style={{ paddingTop: 8 }}
+            readOnly
+          />
+        </div>
+        <div className={classes.stats}>
+          <AttachMoney className={classes.eventIcon} />
+          <Typography className={classes.eventText} variant="body2">
+            {cinema.ticketPrice} <span>$</span> per movie
+          </Typography>
+        </div>
+        <div className={classes.stats}>
+          <EventSeat className={classes.eventIcon} />
+          <Typography className={classes.eventText} variant="body2">
+            {cinema.seatsAvailable} seats Available
+          </Typography>
+        </div>
+        {props.rating ? (<BookingRatingCinemas isOpen={isOpen} setisOpen={setisOpen} cinema={cinema} allCinema={props.allCinema} averageRating={averageRating} />) : (<Fragment></Fragment>)}
+
+      </Paper>
+    </Fragment>
   );
 }
 

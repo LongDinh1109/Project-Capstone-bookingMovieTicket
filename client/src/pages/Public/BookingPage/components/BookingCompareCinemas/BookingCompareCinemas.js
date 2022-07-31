@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -35,6 +35,19 @@ export default function BookingCheckout(props) {
   const classes = useStyles(props);
   const [isOpen, setisOpen] = useState(false);
   const [cinemaChosen, setcinemaChosen] = useState();
+  const [averageRating, setAverageRating] = useState();
+
+  useEffect(() => {
+    console.log("123456", props)
+    if (props.currentCinemas.feedbacks.length > 0) {
+      let total = 0;
+      props.currentCinemas.feedbacks.map((item, _index) => {
+        return total += item.rating;
+      })
+      let average = total / props.currentCinemas.feedbacks.length;
+      setAverageRating(average)
+    }
+  });
   const {
     surroundedCinemas,
     selectedCinema,
@@ -50,6 +63,14 @@ export default function BookingCheckout(props) {
 
   const handleClickOpen = (cinema) => {
     setisOpen(true);
+    if (cinema.feedbacks.length > 0) {
+      let total = 0;
+      cinema.feedbacks.map((item, _index) => {
+        return total += item.rating;
+      })
+      let average = total / cinema.feedbacks.length;
+      setAverageRating(average)
+    }
     setcinemaChosen(cinema)
   }
 
@@ -61,6 +82,9 @@ export default function BookingCheckout(props) {
             {
               currentCinemas && surroundedCinemas && surroundedCinemas.length > 0 ?
                 <>
+                  <Typography gutterBottom variant="h4" component="h1" style={{ paddingLeft: 8, width: '100%', display: 'flex', whiteSpace: 'break-spaces' }}>
+                    Compare prices and detailed reviews between theaters
+                  </Typography>
                   <Typography gutterBottom variant="h4" component="h2" style={{ paddingLeft: 8, width: '100%', display: 'flex', whiteSpace: 'break-spaces' }}>
                     Cinemas with <div style={{ color: '#2AF426' }}>Lower Price</div>
                   </Typography>
@@ -70,7 +94,7 @@ export default function BookingCheckout(props) {
                         <Grid item style={{ width: 'calc(1/3 * 100%)' }}>
                           <Card className={classes.root} onClick={() => { handleClickOpen(cinema) }}>
                             <CardActionArea>
-                              <div style={{textAlign:'center'}}>
+                              <div style={{ textAlign: 'center' }}>
                                 <img alt="cinema" className={classes.media} src={cinema?.image} />
                               </div>
                               <CardContent>
@@ -97,7 +121,7 @@ export default function BookingCheckout(props) {
                                 </Typography>
                                 <Rating
                                   name="simple-controlled"
-                                  value={cinema?.feedback?.rating || 0}
+                                  value={averageRating || 0}
                                   style={{ paddingTop: 8 }}
                                 />
                               </CardContent>
@@ -168,7 +192,7 @@ export default function BookingCheckout(props) {
                   There are no other cinemas in the area
                 </Typography>
             }
-            <BookingRatingCinemas isOpen={isOpen} setisOpen={setisOpen} cinema={cinemaChosen} allCinema={props.allCinema}/>
+            <BookingRatingCinemas isOpen={isOpen} setisOpen={setisOpen} cinema={cinemaChosen} allCinema={props.allCinema} averageRating={averageRating} />
           </Grid>
         </Grid>
       </Grid>
